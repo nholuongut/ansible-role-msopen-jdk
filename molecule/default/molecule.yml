@@ -1,0 +1,42 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: debianbuster
+    image: jrei/systemd-debian:10
+  - name: debianbullseye
+    image: jrei/systemd-debian:11
+  - name: ubuntu18
+    image: solita/ubuntu-systemd:18.04
+  - name: ubuntu-focal-2004
+    image: "ubuntu:focal"
+  - name: fedora
+    image: fedora:29
+  - name: centos7
+    image: quay.io/centos/centos:centos7
+  - name: centos8
+    image: quay.io/centos/centos:stream8
+
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      all:
+       jdk_used_version: ${MOLECULE_JDK_USED_VERSION:-"16"}
+  lint:
+    name: ansible-lint
+    enabled: false
+    options:
+      x:
+        - ANSIBLE0006
+        - ANSIBLE0010
+        - ANSIBLE0011
+        - ANSIBLE0016
+        - ANSIBLE0106
+scenario:
+  name: default
+verifier:
+  name: testinfra
+  directory: ./../../tests/

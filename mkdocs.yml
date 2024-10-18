@@ -1,0 +1,34 @@
+site_name: ansible-role-msopenjdk
+
+# Repository
+repo_name: nolte/ansible-role-msopenjdk
+repo_url: https://github.com/nolte/ansible-role-msopenjdk
+edit_uri: ""
+
+theme:
+  name: 'material'
+docs_dir: docs/
+plugins:
+  - include-markdown
+markdown_extensions:
+  - attr_list
+  - def_list
+  - meta
+  - footnotes
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.betterem
+  - pymdownx.magiclink
+  - pymdownx.extra
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - toc:
+      permalink: True
+#  - pymdownx.emoji:
+#      emoji_index: !!python/name:materialx.emoji.twemoji
+#      emoji_generator: !!python/name:materialx.emoji.to_svg
+nav:
+  - Home: index.md

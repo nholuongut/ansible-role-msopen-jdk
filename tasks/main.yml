@@ -1,0 +1,30 @@
+---
+
+- name: Create Target directory for Java Installation
+  ansible.builtin.file:
+    path: /usr/lib/jvm
+    state: directory
+
+- name: print download url
+  debug:
+    msg: "Try to use OpenJDK Version from {{ downloadUrl }}"
+
+- name: Download file with checksum url (sha256)
+  get_url:
+    url: "{{ downloadUrl }}"
+    dest: "/usr/lib/jvm/{{ downloadUrl | basename }}"
+    checksum: sha256:{{ checksumUrl }}
+  register: openjdk_archive
+
+- name: Unarchive ms openjdk
+  ansible.builtin.unarchive:
+    src: "{{ openjdk_archive.dest }}"
+    dest: /usr/lib/jvm
+    remote_src: true
+  when: openjdk_archive.changed
+
+- name: Correct java version selected
+  community.general.alternatives:
+    name: java
+    link: /usr/bin/java
+    path: /usr/lib/jvm/{{ archiveFolderName }}/bin/java

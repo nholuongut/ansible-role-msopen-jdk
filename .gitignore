@@ -1,0 +1,7 @@
+*~
+.tox
+#Vagrant Files
+.vagrant/*
+__pycache__
+*.retry
+env

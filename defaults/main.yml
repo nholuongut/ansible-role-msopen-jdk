@@ -1,0 +1,22 @@
+---
+
+jdk_used_version: "17"
+
+_jdk_used_version: "{{ jdk_used_version | trim }}"
+
+# https://docs.microsoft.com/de-de/java/openjdk/download
+jdk_versions:
+  "11":
+    archiveFolderName: jdk-11.0.15+10
+    archiveName: microsoft-jdk-11.0.15-linux-x64.tar.gz
+  "16":
+    archiveFolderName: jdk-16.0.2+7
+    archiveName: microsoft-jdk-16.0.2.7.1-linux-x64.tar.gz
+  "17":
+    archiveFolderName: jdk-17.0.3+7
+    archiveName: microsoft-jdk-17.0.3-linux-x64.tar.gz
+
+
+archiveFolderName: "{{ jdk_versions[_jdk_used_version].archiveFolderName }}"
+downloadUrl: "https://aka.ms/download-jdk/{{ jdk_versions[_jdk_used_version].archiveName }}"
+checksumUrl: "https://aka.ms/download-jdk/{{ jdk_versions[_jdk_used_version].archiveName }}.sha256sum.txt"

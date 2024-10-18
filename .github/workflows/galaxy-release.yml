@@ -1,0 +1,11 @@
+name: galaxy-role
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  push_role:
+    uses: nolte/gh-plumbing/.github/workflows/reuseable-ansible-galaxy-push.yaml@v1.0.18
+    secrets:
+      galaxy_api_key: ${{ secrets.galaxy_api_key }}

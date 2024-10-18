@@ -1,0 +1,48 @@
+name: molecule e2e
+
+on:
+  push:
+    paths-ignore:
+    - 'docs/**'
+    - 'requirementsDocs.txt'
+    - '.devcontainer'
+
+
+jobs:
+  molecule:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+      fail-fast: false
+      matrix:
+        python-version: [3.11.1]
+        jdk-version:
+          - 11
+          - 16
+          - 17
+    steps:
+     - uses: actions/checkout@v3.3.0
+       with:
+         path: "${{ github.repository }}"
+     - uses: actions/setup-python@v4
+       with:
+         python-version: "${{ matrix.python-version }}"
+         architecture: 'x64'
+
+     #- uses: gofrolist/molecule-action@v2.2.33
+     #  env:
+     #     MOLECULE_JDK_USED_VERSION: "${{ matrix.jdk-version }}"
+
+     - name: Install dependencies
+       run: |
+         python -m pip install --upgrade pip
+         ls -all
+         pwd
+         pip install -r ./nolte/ansible-role-msopenjdk/requirementsDev.txt
+#
+     - name: Test with molecule
+       run: |
+         cd ./nolte/ansible-role-msopenjdk
+         molecule test
+       env:
+        MOLECULE_JDK_USED_VERSION: "${{ matrix.jdk-version }}"

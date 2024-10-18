@@ -1,0 +1,10 @@
+---
+# These settings are synced to GitHub by https://probot.github.io/apps/settings/
+
+_extends: gh-plumbing:.github/commons-settings.yml
+
+repository:
+  name: ansible-role-msopenjdk
+  description: Ansible Role for install the Microsoft OpenJDK from Archive.
+  homepage: https://nolte.github.io/ansible-role-msopenjdk
+  topics: ansible, ansible-role, openjdk
